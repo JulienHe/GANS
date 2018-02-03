@@ -1,0 +1,13 @@
+subscription{
+    Post(
+      filter: {
+        mutation_in: [CREATED]
+      }
+      ) {
+        node {
+            id
+            imageUrl
+            description
+        }
+    }
+}
