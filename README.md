@@ -1,5 +1,6 @@
-#GANS
-
+# GANS
+Create applications with [GraphQL](http://graphql.org/) 🌁, [Apollo](https://www.apollographql.com/) 👩‍🚀, [Next.js](https://github.com/zeit/next.js/) 👉 and [Styled-components](https://www.styled-components.com/) 💅.
+All on firebase 🔥
 ## Installation
 
 ```bash
