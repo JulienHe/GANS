@@ -1,5 +1,5 @@
 import React, { PropTypes, PureComponent } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 
 export class MetaHead extends PureComponent {
   render() {
@@ -9,7 +9,7 @@ export class MetaHead extends PureComponent {
       </Head>
     )
   }
-}
+};
 
 MetaHead.propTypes = {
 };

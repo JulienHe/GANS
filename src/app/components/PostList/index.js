@@ -1,7 +1,7 @@
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-const POSTS_PER_PAGE = 10
+const POSTS_PER_PAGE = 10;
 
 function PostList({
   data: { loading, error, allPosts, _allPostsMeta },
@@ -79,4 +79,4 @@ export default graphql(allPosts, {
       })
     }
   })
-})(PostList)
+})(PostList);

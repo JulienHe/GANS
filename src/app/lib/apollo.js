@@ -1,5 +1,5 @@
-import { withData } from 'next-apollo'
-import { HttpLink } from 'apollo-link-http'
+import { withData } from 'next-apollo';
+import { HttpLink } from 'apollo-link-http';
 
 const config = {
   link: new HttpLink({
@@ -10,4 +10,4 @@ const config = {
   })
 }
 
-export default withData(config)
+export default withData(config);
