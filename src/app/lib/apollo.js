@@ -8,6 +8,6 @@ const config = {
       credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
     }
   })
-}
+};
 
 export default withData(config);
