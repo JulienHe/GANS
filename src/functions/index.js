@@ -1,4 +1,4 @@
-import { nextApp as next } from "./app/app"
+import { nextApp as next } from './app';
 
 /*
 Namespace application services with function groups.
@@ -10,6 +10,6 @@ Partially deploy namespaces for independent service updates.
 const app = {
   next,
   // other Hosting dependencies
-}
+};
 
-export { app }
+export { app };
