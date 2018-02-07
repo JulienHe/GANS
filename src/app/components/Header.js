@@ -7,17 +7,22 @@ const Navigation = styled.header`
   background: red;
 `;
 
+const HeaderLink = styled.a`
+  margin: 0 8px;
+  display: inline-block;
+`;
+
 function Header(pathname) {
   return (
     <Navigation>
-      <Link href='/'>
-        <a className={pathname === '/' ? 'is-active' : ''}>Home</a>
-      </Link>{' '}
-      <Link href='/about'>
-        <a className={pathname === '/about' ? 'is-active' : ''}>About</a>
+      <Link href='/' passHref>
+        <HeaderLink className={pathname === '/' ? 'is-active' : ''}>Home</HeaderLink>
       </Link>
-      <Link href='/list'>
-        <a className={pathname === '/list' ? 'is-active' : ''}>List</a>
+      <Link href='/about' passHref>
+        <HeaderLink className={pathname === '/about' ? 'is-active' : ''}>About</HeaderLink>
+      </Link>
+      <Link href='/list' passHref>
+        <HeaderLink className={pathname === '/list' ? 'is-active' : ''}>List</HeaderLink>
       </Link>
     </Navigation>
   );
