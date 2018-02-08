@@ -64,13 +64,12 @@ const CREATE_POST_MUTATION = gql`
   }
 `;
 
-const AddPost = graphql(CREATE_POST_MUTATION, {
-  name: 'createPostMutation',
-})(AddImages);
-
-
 AddImages.propTypes = {
   createPostMutation: PropTypes.func,
 };
+
+const AddPost = graphql(CREATE_POST_MUTATION, {
+  name: 'createPostMutation',
+})(AddImages);
 
 export default AddPost;
