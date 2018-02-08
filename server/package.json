@@ -1,5 +1,8 @@
 {
   "name": "Gans",
   "version": "1.0.0",
-  "description": "Gans"
+  "description": "Gans",
+  "dependencies": {
+    "graphcool-lib": "^0.1.4"
+  }
 }

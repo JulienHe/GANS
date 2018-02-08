@@ -5,9 +5,15 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 
 import Post from 'components/Post';
+import AddPost from 'components/AddPost';
 
 const ListPicture = styled.section`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
 `;
 
 class PostList extends React.Component {
@@ -24,14 +30,17 @@ class PostList extends React.Component {
     }
 
     return (
-      <ListPicture>
-        {this.props.allPostsQuery.allPosts && this.props.allPostsQuery.allPosts.map(post => (
-          <Post
-            key={post.id}
-            post={post}
-          />
-        ))}
-      </ListPicture>
+      <section>
+        <AddPost />
+        <ListPicture>
+          {this.props.allPostsQuery.allPosts && this.props.allPostsQuery.allPosts.map(post => (
+            <Post
+              key={post.id}
+              post={post}
+            />
+          ))}
+        </ListPicture>
+      </section>
     );
   }
 }
