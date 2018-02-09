@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 
@@ -16,10 +16,52 @@ const ListPicture = styled.section`
   margin: 0 auto;
 `;
 
-class PostList extends React.Component {
+const ALL_POSTS_QUERY = gql`
+  query AllPostsQuery {
+    allPosts(orderBy: createdAt_DESC) {
+      id
+      imageUrl
+      description
+    }
+  }
+`;
+
+const POST_SUBSCRIPTION = gql`
+  subscription createPost {
+    Post(filter: {mutation_in: [CREATED]}) {
+      node {
+        id
+        imageUrl
+        description
+      }
+    }
+  }
+`;
+
+class PostList extends Component {
+  componentWillMount() {
+    this.props.allPostsQuery.subscribeToMore({
+      document: POST_SUBSCRIPTION,
+      updateQuery: (prev, {subscriptionData}) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+        const newPost = subscriptionData.data.Post.node;
+        if (!prev.allPosts.find((post) => post.id === newPost.id)) {
+          let updatePost = Object.assign({}, prev, { allPosts :[newPost, ...prev.allPosts ] });
+          return updatePost;
+        } else {
+          return prev;
+        }
+      },
+    });
+  }
 
   render() {
-    if (this.props.allPostsQuery.loading) {
+    // Receive data
+    const allPostsQuery = this.props.allPostsQuery;
+
+    if (allPostsQuery.loading) {
       return (
         <div>
           <div>
@@ -29,11 +71,19 @@ class PostList extends React.Component {
       );
     }
 
+    if (allPostsQuery.error) {
+      return <p>{allPostsQuery.error.message}</p>;
+    }
+
+    if (allPostsQuery.allPosts === null){
+      return <p>Oups, nothing here</p>;
+    }
+
     return (
       <section>
         <AddPost />
         <ListPicture>
-          {this.props.allPostsQuery.allPosts && this.props.allPostsQuery.allPosts.map(post => (
+          {allPostsQuery.allPosts && allPostsQuery.allPosts.map(post => (
             <Post
               key={post.id}
               post={post}
@@ -45,25 +95,11 @@ class PostList extends React.Component {
   }
 }
 
-const ALL_POSTS_QUERY = gql`
-  query AllPostsQuery {
-    allPosts(orderBy: createdAt_DESC) {
-      id
-      imageUrl
-      description
-    }
-  }
-`;
-
 PostList.propTypes = {
   allPostsQuery: PropTypes.obj,
 };
 
-const PostListPage = graphql(ALL_POSTS_QUERY, {
-  name: 'allPostsQuery',
-  options: {
-    fetchPolicy: 'network-only',
-  },
-})(PostList);
-
-export default PostListPage;
+export default compose(
+  graphql(ALL_POSTS_QUERY, { name: 'allPostsQuery' }),
+  graphql(POST_SUBSCRIPTION, { name: 'postSubscription' }),
+)(PostList);
