@@ -1,93 +1,123 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql, compose } from 'react-apollo';
+import styled from 'styled-components';
 
-const POSTS_PER_PAGE = 10;
+import Post from 'components/Post';
+import AddPost from 'components/AddPost';
 
-function PostList({
-  data: { loading, error, allPosts, _allPostsMeta },
-  loadMorePosts
-}) {
-  if (error) return (
-    <p>Error loading posts.</p>
-  );
-  if (allPosts && allPosts.length) {
-    const areMorePosts = allPosts.length < _allPostsMeta.count;
+// local
+import {
+  ALL_POSTS_QUERY,
+  DELETE_POST,
+  CHANGED_POST_SUBSCRIPTION,
+} from './query';
+
+const ListPicture = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+`;
+
+class PostList extends Component {
+  componentWillMount() {
+    this.ChangedPostSubscription = this.props.allPostsQuery.subscribeToMore({
+      document: CHANGED_POST_SUBSCRIPTION,
+      updateQuery: (prev, {subscriptionData}) => {
+        // If we have nothing 😢
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        // Retrieve information
+        const postFromSubscription = subscriptionData.data.Post;
+        const typeOfmutation = postFromSubscription.mutation;
+
+        // Check which mutation is and run correct script
+        // POST DELETED
+        if (typeOfmutation === 'DELETED') {
+          // Get ID to remove
+          const idToRemove = postFromSubscription.previousValues.id;
+          if (prev.allPosts.find((post) => post.id === idToRemove)) {
+            return Object.assign({}, prev, { allPosts: prev.allPosts.filter((post) => post.id !== idToRemove) });
+          } else {
+            return prev;
+          }
+
+        // NEW POST CREATED
+        } else if (typeOfmutation === 'CREATED') {
+          const newPost = postFromSubscription.node;
+          if (!prev.allPosts.find((post) => post.id === newPost.id)) {
+            return Object.assign({}, prev, { allPosts :[newPost, ...prev.allPosts ] });
+          } else {
+            return prev;
+          }
+
+        // If No Mutation
+        } else {
+          return prev;
+        }
+      },
+      onError: (err) => console.error(err), // eslint-disable-line no-console
+    });
+  }
+
+  deletePost = async (id) => {
+    await this.props.deletePostQuery({
+      variables: {id}
+    });
+  }
+
+  render() {
+    // Receive data
+    const allPostsQuery = this.props.allPostsQuery;
+
+    if (allPostsQuery.loading) {
+      return (
+        <div>
+          <div>
+            Loading...
+          </div>
+        </div>
+      );
+    }
+
+    if (allPostsQuery.error) {
+      return <p>{allPostsQuery.error.message}</p>;
+    }
+
+    if (allPostsQuery.allPosts === null){
+      return <p>Oups, nothing here</p>;
+    }
+
     return (
       <section>
-        <ul>
-          {allPosts.map((post, index) => (
-            <li key={post.id}>
-              <div>
-                <span>{index + 1}. </span>
-                <a href={post.url}>{post.title}</a>
-                <button id={post.id} votes={post.votes} />
-              </div>
-            </li>
+        <AddPost />
+        <ListPicture>
+          {allPostsQuery.allPosts && allPostsQuery.allPosts.map(post => (
+            <Post
+              key={post.id}
+              post={post}
+              onDeletePost={(id) => this.deletePost(id)}
+            />
           ))}
-        </ul>
-        {areMorePosts ? (
-          <button onClick={() => loadMorePosts()}>
-            {loading ? 'Loading...' : 'Show More'}
-          </button>
-        ) : (
-          ''
-        )}
+        </ListPicture>
       </section>
     );
   }
-  return (
-    <div>Loading...</div>
-  );
 }
 
-const allPosts = gql`
-  query allPosts($first: Int!, $skip: Int!) {
-    allPosts(orderBy: createdAt_DESC, first: $first, skip: $skip) {
-      id
-      title
-      votes
-      url
-      createdAt
-    }
-    _allPostsMeta {
-      count
-    }
-  }
-`;
-
 PostList.propTypes = {
-  data: PropTypes.object,
-  loadMorePosts: PropTypes.func,
+  allPostsQuery: PropTypes.object,
+  deletePostQuery: PropTypes.func,
+  deletePost: PropTypes.func,
 };
 
-// The `graphql` wrapper executes a GraphQL query and makes the results
-// available on the `data` prop of the wrapped component (PostList)
-export default graphql(allPosts, {
-  options: {
-    variables: {
-      skip: 0,
-      first: POSTS_PER_PAGE
-    }
-  },
-  props: ({ data }) => ({
-    data,
-    loadMorePosts: () => {
-      return data.fetchMore({
-        variables: {
-          skip: data.allPosts.length
-        },
-        updateQuery: (previousResult, { fetchMoreResult }) => {
-          if (!fetchMoreResult) {
-            return previousResult;
-          }
-          return Object.assign({}, previousResult, {
-            // Append the new posts results to the old one
-            allPosts: [...previousResult.allPosts, ...fetchMoreResult.allPosts]
-          });
-        }
-      });
-    }
-  })
-})(PostList);
+export default compose(
+  graphql(ALL_POSTS_QUERY, { name: 'allPostsQuery' }),
+  graphql(DELETE_POST, { name: 'deletePostQuery' }),
+  graphql(CHANGED_POST_SUBSCRIPTION, { name: 'changedPost' }),
+)(PostList);
