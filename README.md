@@ -69,5 +69,16 @@ yarn deploy-all
 yarn clean
 ```
 
-## Thanks!
+## Contributing
+
+You are more then welcome to help GANS to be successful! Let's do it together!
+
+1. Fork it ( https://github.com/JulienHe/GANS/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Check if tests failing (`rake spec` or `bundle exec rake spec`)
+6. Create a new Pull Request
+
+## Special thanks!
 Special shoutout to [@jthegedus](https://github.com/jthegedus), you kill it!
