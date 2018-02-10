@@ -1,8 +1,9 @@
-import {withData} from 'next-apollo';
-import {HttpLink} from 'apollo-link-http';
-import {WebSocketLink} from 'apollo-link-ws';
-import {split} from 'apollo-client-preset';
-import {getMainDefinition} from 'apollo-utilities';
+import { withData } from 'next-apollo';
+import { HttpLink } from 'apollo-link-http';
+import { WebSocketLink } from 'apollo-link-ws';
+import { split } from 'apollo-client-preset';
+import { getMainDefinition } from 'apollo-utilities';
+import {  InMemoryCache } from 'apollo-cache-inmemory';
 
 const GRAPHQL_ENDPOINT = ' https://api.graph.cool/simple/v1/cjdd0efxp3les0146142pum8n'; // Replace with your own simple endpoint
 const SUBSCRIPTIONS_ENDPOINT = 'wss://subscriptions.ap-northeast-1.graph.cool/v1/cjdd0efxp3les0146142pum8n'; // Replace with your own subscriptions endpoint
@@ -24,6 +25,7 @@ export default withData(headers => {
     // resend the headers on the server side, to be truly isomorphic (makes authentication possible)
     headers
   });
+  const cache = new InMemoryCache();
 
   return {
     link: process.browser
@@ -40,8 +42,8 @@ export default withData(headers => {
             reconnect: true
           },
         }),
-        httpLink
+        httpLink, cache
       )
-      : httpLink
+      : httpLink, cache
   };
 });
