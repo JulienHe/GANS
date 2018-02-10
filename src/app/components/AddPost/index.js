@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import styled from 'styled-components';
+
+// Local
+import { CREATE_POST_MUTATION } from './query';
 
 const AddPostForm = styled.div`
   font-size: 16px;
@@ -77,15 +79,7 @@ class AddImages extends Component {
 
 }
 
-const CREATE_POST_MUTATION = gql`
-  mutation CreatePostMutation($description: String!, $imageUrl: String!) {
-    createPost(description: $description, imageUrl: $imageUrl) {
-      id
-      description
-      imageUrl
-    }
-  }
-`;
+
 
 AddImages.propTypes = {
   createPostMutation: PropTypes.func,

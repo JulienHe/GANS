@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const PostContent = styled.div`
   display: inline-block;
   margin: 8px;
+  position: relative;
 `;
 
 const PostContentFigure = styled.figure`
@@ -20,7 +21,23 @@ const PostContentFigure = styled.figure`
   }
 `;
 
+const PostContentDelete = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+`;
+
 class Post extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.deletePost = this.deletePost.bind(this);
+  }
+
+  deletePost() {
+    this.props.onDeletePost(this.props.post.id);
+  }
+
   render() {
     return (
       <PostContent>
@@ -30,6 +47,9 @@ class Post extends React.Component {
         <figcaption>
           {this.props.post.description}
         </figcaption>
+        <PostContentDelete
+          onClick={this.deletePost}
+        >Delete</PostContentDelete>
       </PostContent>
     );
   }
@@ -37,6 +57,7 @@ class Post extends React.Component {
 
 Post.propTypes = {
   post: PropTypes.object,
+  onDeletePost: PropTypes.func,
 };
 
 export default Post;
