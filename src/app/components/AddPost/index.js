@@ -2,9 +2,32 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import styled from 'styled-components';
 
-// Project
-import { Modal } from 'components/Modal';
+const AddPostForm = styled.div`
+  font-size: 16px;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 8px;
+  width: 100%;
+`;
+
+const AddPostInput = styled.input`
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid #ececec;
+`;
+
+const AddPostSubmit = styled.button`
+  width: 100%;
+  padding: 8px;
+  background-color: #f33267;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+`;
 
 class AddImages extends Component {
   constructor(props) {
@@ -26,29 +49,29 @@ class AddImages extends Component {
 
   render() {
     return (
-      <Modal>
+      <AddPostForm>
         <div>
           <div>
-            <input
+            <AddPostInput
               value={this.state.imageUrl}
               placeholder='Image Url'
               onChange={e => this.setState({imageUrl: e.target.value})}
             />
-            <input
+            <AddPostInput
               value={this.state.description}
               placeholder='Description'
               onChange={e => this.setState({description: e.target.value})}
             />
             {this.state.description &&
               this.state.imageUrl &&
-              <button
+              <AddPostSubmit
                 onClick={this.handlePost}
               >
                 Post
-              </button>}
+              </AddPostSubmit>}
           </div>
         </div>
-      </Modal>
+      </AddPostForm>
     );
   }
 
