@@ -40,7 +40,7 @@ const POST_SUBSCRIPTION = gql`
 
 class PostList extends Component {
   componentWillMount() {
-    this.props.allPostsQuery.subscribeToMore({
+    this.CreatePostSubscription = this.props.allPostsQuery.subscribeToMore({
       document: POST_SUBSCRIPTION,
       updateQuery: (prev, {subscriptionData}) => {
         if (!subscriptionData.data) {
@@ -54,6 +54,7 @@ class PostList extends Component {
           return prev;
         }
       },
+      onError: (err) => console.error(err), // eslint-disable-line no-console
     });
   }
 
