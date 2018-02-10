@@ -21,10 +21,39 @@ const PostContentFigure = styled.figure`
   }
 `;
 
-const PostContentDelete = styled.button`
+const PostContentDelete = styled.div`
   position: absolute;
-  top: 8px;
-  right: 8px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: .3s ease opacity;
+  padding: 16px;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const PostContentDeleteButton = styled.button`
+  background-color: #fc2e57;
+  border: 0;
+  color: white;
+  font-size: 14px;
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background .3s ease;
+  &:hover {
+    background-color: #ff4066;
+  }
+`;
+
+const PostContentFigcaption = styled.p`
+  font-size: 1.6rem;
 `;
 
 class Post extends React.Component {
@@ -43,13 +72,15 @@ class Post extends React.Component {
       <PostContent>
         <PostContentFigure>
           <img src={this.props.post.imageUrl} />
+          <PostContentDelete>
+            <PostContentDeleteButton
+              onClick={this.deletePost}
+            >Delete</PostContentDeleteButton>
+          </PostContentDelete>
         </PostContentFigure>
-        <figcaption>
+        <PostContentFigcaption>
           {this.props.post.description}
-        </figcaption>
-        <PostContentDelete
-          onClick={this.deletePost}
-        >Delete</PostContentDelete>
+        </PostContentFigcaption>
       </PostContent>
     );
   }

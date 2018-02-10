@@ -70,7 +70,7 @@ injectGlobal`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  body {
-    font-size: 1.6rem;
+  button {
+    font-family: 'Barlow', sans-serif;
   }
 `;
