@@ -1,3 +1,5 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/JulienHe/GANS.svg?columns=all)](https://waffle.io/JulienHe/GANS)
+
 # GANS
 Create applications with [GraphQL](http://graphql.org/) 🌁, [Apollo](https://www.apollographql.com/) 👩‍🚀, [Next.js](https://github.com/zeit/next.js/) 👉 and [Styled-components](https://www.styled-components.com/) 💅.
 All on firebase 🔥
