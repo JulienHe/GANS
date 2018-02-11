@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/JulienHe/GANS.svg?branch=master)](https://travis-ci.org/JulienHe/GANS)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/JulienHe/GANS.svg?columns=all)](https://waffle.io/JulienHe/GANS)
 
 # GANS
