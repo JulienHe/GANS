@@ -67,7 +67,8 @@
     "build-app": "next build \"src/app\"",
     "copy-deps": "cpx \"*{package.json,yarn.lock}\" \"dist/functions\"",
     "install-deps": "cd \"dist/functions\" && yarn",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "test": "eslint src/app"
   },
   "lint-staged": {
     "*.js": [
