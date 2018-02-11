@@ -6,4 +6,4 @@ install:
 cache:
   yarn: true
 script:
-  - yarn run build-app
+  - yarn run test
