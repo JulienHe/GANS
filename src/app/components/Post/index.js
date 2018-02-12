@@ -3,16 +3,20 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const PostContent = styled.div`
-  display: inline-block;
-  margin: 8px;
   position: relative;
+  flex: 1 0 0%;
+  width: 100%;
+  display: block;
+  margin-right: 24px;
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const PostContentFigure = styled.figure`
-  height: 320px;
-  width: 320px;
   position: relative;
   overflow: hidden;
+  padding-top: 100%;
   img {
     position: absolute;
     width: 100%;
@@ -21,17 +25,18 @@ const PostContentFigure = styled.figure`
   }
 `;
 
-const PostContentDelete = styled.div`
-  position: absolute;
+const PostContentHover = styled.div`
+  background-color: #000000cc;
   display: flex;
-  justify-content: flex-end;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
   height: 100%;
   opacity: 0;
-  transition: .3s ease opacity;
   padding: 16px;
+  position: absolute;
+  transition: .3s ease opacity;
+  width: 100%;
+  top: 0;
+  text-align: center;
   &:hover {
     opacity: 1;
   }
@@ -52,8 +57,15 @@ const PostContentDeleteButton = styled.button`
   }
 `;
 
-const PostContentFigcaption = styled.p`
-  font-size: 1.6rem;
+const PostContentFigcaption = styled.figcaption`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+
+  font-size: 2.4rem;
+  display: flex;
+  color: white;
 `;
 
 class Post extends React.Component {
@@ -72,15 +84,15 @@ class Post extends React.Component {
       <PostContent>
         <PostContentFigure>
           <img src={this.props.post.imageUrl} />
-          <PostContentDelete>
+          <PostContentHover>
+            <PostContentFigcaption>
+              <p>{this.props.post.description}</p>
+            </PostContentFigcaption>
             <PostContentDeleteButton
               onClick={this.deletePost}
             >Delete</PostContentDeleteButton>
-          </PostContentDelete>
+          </PostContentHover>
         </PostContentFigure>
-        <PostContentFigcaption>
-          {this.props.post.description}
-        </PostContentFigcaption>
       </PostContent>
     );
   }

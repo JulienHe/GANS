@@ -1,35 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import styled from 'styled-components';
 
 const Navigation = styled.header`
-  background: red;
+  text-align: center;
+  padding: 16px;
 `;
 
 const HeaderLink = styled.a`
   margin: 0 8px;
   display: inline-block;
+  font-size: 14px;
+  color: #3C3C3C;
+  text-transform: uppercase;
 `;
 
-function Header(pathname) {
+function Header() {
   return (
     <Navigation>
       <Link href='/' passHref>
-        <HeaderLink className={pathname === '/' ? 'is-active' : ''}>Home</HeaderLink>
+        <HeaderLink>Home</HeaderLink>
       </Link>
       <Link href='/about' passHref>
-        <HeaderLink className={pathname === '/about' ? 'is-active' : ''}>About</HeaderLink>
+        <HeaderLink>About</HeaderLink>
       </Link>
       <Link href='/list' passHref>
-        <HeaderLink className={pathname === '/list' ? 'is-active' : ''}>List</HeaderLink>
+        <HeaderLink>List</HeaderLink>
       </Link>
     </Navigation>
   );
 }
-
-Header.propTypes = {
-  pathname: PropTypes.string,
-};
 
 export default Header;

@@ -15,11 +15,17 @@ import {
 
 const ListPicture = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
   width: 100%;
-  max-width: 1140px;
+  max-width: 935px;
   margin: 0 auto;
+`;
+
+const ListPictureBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-bottom: 24px;
 `;
 
 class PostList extends Component {
@@ -97,13 +103,22 @@ class PostList extends Component {
       <section>
         <AddPost />
         <ListPicture>
-          {allPostsQuery.allPosts && allPostsQuery.allPosts.map(post => (
-            <Post
-              key={post.id}
-              post={post}
-              onDeletePost={(id) => this.deletePost(id)}
-            />
-          ))}
+          {allPostsQuery.allPosts && allPostsQuery.allPosts
+            .map(post => (
+              <Post
+                key={post.id}
+                post={post}
+                onDeletePost={(id) => this.deletePost(id)}
+              />
+            ))
+            .reduce((postGroups, post, i) => (
+              i % 3 === 0 ? postGroups.push([post]) : postGroups[postGroups.length - 1].push(post),
+              postGroups
+            ),[])
+            .map((postGroup, i) => (
+              <ListPictureBlock key={i}>{postGroup}</ListPictureBlock>
+            ))
+          }
         </ListPicture>
       </section>
     );
