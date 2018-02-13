@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
-
+import {
+  Container,
+} from 'components/Helpers/General';
 import Post from 'components/Post';
 import AddPost from 'components/AddPost';
 
@@ -17,7 +19,6 @@ const ListPicture = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 935px;
   margin: 0 auto;
 `;
 
@@ -100,7 +101,7 @@ class PostList extends Component {
     }
 
     return (
-      <section>
+      <Container>
         <AddPost />
         <ListPicture>
           {allPostsQuery.allPosts && allPostsQuery.allPosts
@@ -120,7 +121,7 @@ class PostList extends Component {
             ))
           }
         </ListPicture>
-      </section>
+      </Container>
     );
   }
 }
