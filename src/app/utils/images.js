@@ -1,3 +1,6 @@
 export default {
-  logo: '/static/social/fb/og.png',
+  logo: {
+    vector: '/static/logos/gans.svg',
+    colorful: '/static/logos/gans.png',
+  }
 };

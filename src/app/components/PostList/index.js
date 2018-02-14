@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
-
+import {
+  Container,
+} from 'components/Helpers/General';
+import Loading from 'components/Helpers/Loading';
 import Post from 'components/Post';
 import AddPost from 'components/AddPost';
-
+// Project
+import { media } from 'utils/style';
 // local
 import {
   ALL_POSTS_QUERY,
@@ -15,11 +19,19 @@ import {
 
 const ListPicture = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
   width: 100%;
-  max-width: 1140px;
   margin: 0 auto;
+`;
+
+const ListPictureBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 24px;
+  ${media.tablet`
+    flex-direction: row;
+  `}
 `;
 
 class PostList extends Component {
@@ -75,16 +87,6 @@ class PostList extends Component {
     // Receive data
     const allPostsQuery = this.props.allPostsQuery;
 
-    if (allPostsQuery.loading) {
-      return (
-        <div>
-          <div>
-            Loading...
-          </div>
-        </div>
-      );
-    }
-
     if (allPostsQuery.error) {
       return <p>{allPostsQuery.error.message}</p>;
     }
@@ -94,18 +96,28 @@ class PostList extends Component {
     }
 
     return (
-      <section>
+      <Container>
         <AddPost />
+        {allPostsQuery.loading ? <Loading /> : ''}
         <ListPicture>
-          {allPostsQuery.allPosts && allPostsQuery.allPosts.map(post => (
-            <Post
-              key={post.id}
-              post={post}
-              onDeletePost={(id) => this.deletePost(id)}
-            />
-          ))}
+          {allPostsQuery.allPosts && allPostsQuery.allPosts
+            .map(post => (
+              <Post
+                key={post.id}
+                post={post}
+                onDeletePost={(id) => this.deletePost(id)}
+              />
+            ))
+            .reduce((postGroups, post, i) => (
+              i % 3 === 0 ? postGroups.push([post]) : postGroups[postGroups.length - 1].push(post),
+              postGroups
+            ),[])
+            .map((postGroup, i) => (
+              <ListPictureBlock key={i}>{postGroup}</ListPictureBlock>
+            ))
+          }
         </ListPicture>
-      </section>
+      </Container>
     );
   }
 }

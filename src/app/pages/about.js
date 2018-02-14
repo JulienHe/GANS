@@ -1,6 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import App from 'components/App';
+import {
+  Container,
+  Title,
+} from 'components/Helpers/General';
 
 function About() {
   return (
@@ -8,9 +12,9 @@ function About() {
       <Head>
         <meta property='og:url' content='https://medium.com/' />
       </Head>
-      <article>
-        About this page
-      </article>
+      <Container>
+        <Title>About</Title>
+      </Container>
     </App>
   );
 }
