@@ -43,15 +43,22 @@ const PostContentHover = styled.div`
 `;
 
 const PostContentDeleteButton = styled.button`
+  /* Block */
   background-color: #fc2e57;
-  border: 0;
-  color: white;
-  font-size: 14px;
-  padding: 8px 16px;
-  font-weight: 600;
   border-radius: 3px;
-  cursor: pointer;
+  border: 0;
+  padding: 8px 16px;
+
+  /* Font */
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+
+  /* Transform & Transition */
   transition: background .3s ease;
+
+  /* Mouse */
+  cursor: pointer;*/
   &:hover {
     background-color: #ff4066;
   }
@@ -64,7 +71,6 @@ const PostContentFigcaption = styled.figcaption`
   justify-content: center;
 
   font-size: 2.4rem;
-  display: flex;
   color: white;
 `;
 
