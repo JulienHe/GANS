@@ -5,9 +5,11 @@ import styled from 'styled-components';
 import {
   Container,
 } from 'components/Helpers/General';
+import Loading from 'components/Helpers/Loading';
 import Post from 'components/Post';
 import AddPost from 'components/AddPost';
-
+// Project
+import { media } from 'utils/style';
 // local
 import {
   ALL_POSTS_QUERY,
@@ -24,9 +26,12 @@ const ListPicture = styled.div`
 
 const ListPictureBlock = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: stretch;
   margin-bottom: 24px;
+  ${media.tablet`
+    flex-direction: row;
+  `}
 `;
 
 class PostList extends Component {
@@ -82,16 +87,6 @@ class PostList extends Component {
     // Receive data
     const allPostsQuery = this.props.allPostsQuery;
 
-    if (allPostsQuery.loading) {
-      return (
-        <div>
-          <div>
-            Loading...
-          </div>
-        </div>
-      );
-    }
-
     if (allPostsQuery.error) {
       return <p>{allPostsQuery.error.message}</p>;
     }
@@ -103,6 +98,7 @@ class PostList extends Component {
     return (
       <Container>
         <AddPost />
+        {allPostsQuery.loading ? <Loading /> : ''}
         <ListPicture>
           {allPostsQuery.allPosts && allPostsQuery.allPosts
             .map(post => (
