@@ -34,8 +34,8 @@
     "graphql-tag": "^2.7.3",
     "husky": "^0.14.3",
     "lint-staged": "^6.1.0",
-    "next": "^4.2.3",
-    "next-apollo": "^1.0.10",
+    "next": "^5.0.0",
+    "next-apollo": "^1.0.11",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
@@ -53,7 +53,6 @@
     "eslint": "^4.17.0",
     "eslint-plugin-react": "^7.6.1",
     "firebase-tools": "^3.17.4",
-    "prettier": "^1.10.2",
     "rimraf": "^2.6.2"
   },
   "scripts": {
