@@ -1,3 +1,4 @@
+[![Gans Logo](https://gans-julienhe.firebaseapp.com/static/logos/gans.png)](https://github.com/JulienHe/GANS)
 [![Build Status](https://travis-ci.org/JulienHe/GANS.svg?branch=master)](https://travis-ci.org/JulienHe/GANS)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/JulienHe/GANS.svg?columns=all)](https://waffle.io/JulienHe/GANS)
 [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
@@ -81,8 +82,7 @@ You are more then welcome to help GANS to be successful! Let's do it together!
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Check if tests failing (`rake spec` or `bundle exec rake spec`)
-6. Create a new Pull Request
+5. Create a new Pull Request
 
 ## Special thanks!
 Special shoutout to [@jthegedus](https://github.com/jthegedus), you kill it!
