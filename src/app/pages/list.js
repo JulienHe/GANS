@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import Head from 'next/head';
 import PostList from 'components/PostList';
 import App from 'components/App';
-import withData from 'lib/apollo';
+import withData from 'lib/withData';
 
 export class List extends PureComponent {
   render() {
