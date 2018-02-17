@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Error extends React.Component {
   static getInitialProps({ res, err }) {
