@@ -35,7 +35,7 @@ const ListPictureBlock = styled.div`
 `;
 
 class PostList extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.ChangedPostSubscription = this.props.allPostsQuery.subscribeToMore({
       document: CHANGED_POST_SUBSCRIPTION,
       updateQuery: (prev, {subscriptionData}) => {
