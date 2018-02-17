@@ -1,10 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import images from 'utils/images';
 import {
   Container,
 } from 'components/Helpers/General';
+import { Link } from 'src/routes';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -30,27 +30,32 @@ const HeaderLink = styled.a`
   text-transform: uppercase;
 `;
 
-function Header() {
-  return (
-    <Container>
-      <HeaderContainer>
-        <HeaderLogo>
-          <img src={images.logo.vector} />
-        </HeaderLogo>
-        <HeaderNavigation>
-          <Link href='/' passHref>
-            <HeaderLink>Home</HeaderLink>
-          </Link>
-          <Link href='/about' passHref>
-            <HeaderLink>About</HeaderLink>
-          </Link>
-          <Link href='/list' passHref>
-            <HeaderLink>List</HeaderLink>
-          </Link>
-        </HeaderNavigation>
-      </HeaderContainer>
-    </Container>
-  );
+export class Header extends PureComponent {
+  render() {
+    return (
+      <Container>
+        <HeaderContainer>
+          <HeaderLogo>
+            <img src={images.logo.vector} />
+          </HeaderLogo>
+          <HeaderNavigation>
+            <Link route='home' passHref>
+              <HeaderLink>Home</HeaderLink>
+            </Link>
+            <Link route='about' passHref>
+              <HeaderLink>About</HeaderLink>
+            </Link>
+            <Link route='aboutProfile' params={{id: '12341'}} passHref>
+              <HeaderLink>About with ID</HeaderLink>
+            </Link>
+            <Link route='list' passHref>
+              <HeaderLink>List</HeaderLink>
+            </Link>
+          </HeaderNavigation>
+        </HeaderContainer>
+      </Container>
+    );
+  }
 }
 
 export default Header;
