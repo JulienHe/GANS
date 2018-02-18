@@ -46,11 +46,12 @@ export class Header extends PureComponent {
               <HeaderLink>About</HeaderLink>
             </Link>
             <Link route='aboutProfile' params={{id: '12341'}} passHref>
-              <HeaderLink>About with ID</HeaderLink>
+              <HeaderLink>URL with ID</HeaderLink>
             </Link>
             <Link route='list' passHref>
               <HeaderLink>List</HeaderLink>
             </Link>
+            <HeaderLink href="https://github.com/JulienHe/GANS" target="_blank">Github</HeaderLink>
           </HeaderNavigation>
         </HeaderContainer>
       </Container>

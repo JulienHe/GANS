@@ -14,14 +14,14 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>Aroe.mediun shor|ener</title>
+          <title>GANS</title>
           <meta charSet='UTF-8' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <meta property='og:url' content='https://www.aroe.pw' />
+          <meta property='og:url' content='https://gans-julienhe.firebaseapp.com' />
           <meta property='og:type' content='website' />
-          <meta property='og:title' content='short is cute. shor|ener from Aroe.medium' />
-          <meta name='description' content='we take your url, we make it short and we give information' />
-          <meta property='og:image' content='https://www.aroe.pw/public/social/fb/og.png' />
+          <meta property='og:title' content='GANS' />
+          <meta name='description' content='Yes, another server side rendering boilerplate.' />
+          <meta property='og:image' content='https://gans-julienhe.firebaseapp.com/public/social/fb/og.png' />
           {this.props.styleTags}
         </Head>
         <body>

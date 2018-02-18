@@ -15,9 +15,6 @@ export class About extends PureComponent {
 
     return (
       <App>
-        <Head>
-          <meta property='og:url' content='https://medium.com/' />
-        </Head>
         <Container>
           <Title>About</Title>
           <Text>{id}</Text>
