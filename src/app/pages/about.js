@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 import App from 'components/App';
 import {
   Container,
