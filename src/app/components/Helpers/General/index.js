@@ -10,3 +10,7 @@ export const Container = styled.main`
 export const Title = styled.h2`
   font-size: 24px;
 `;
+
+export const Text = styled.p`
+  font-size: 16px;
+`;

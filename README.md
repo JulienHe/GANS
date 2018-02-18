@@ -44,6 +44,12 @@ yarn dev
 ```
 You can see the local development on [http://localhost:3000/](http://localhost:3000/)
 
+## Next-routes
+
+GANS is using [next-routes](https://github.com/fridays/next-routes) to manage routing for the project.
+You can manage your routes inside `routes.js` file.
+Check Next-routes documentation for usage.
+
 ## Deploy to Firebase
 
 You will need to connect the project to your Firebase project. Edit the name in .firebaserc or run `firebase init` and choose not to override any files.

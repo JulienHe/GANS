@@ -19,5 +19,5 @@ export default class Error extends React.Component {
 }
 
 Error.propTypes = {
-  statusCode: PropTypes.string,
+  statusCode: PropTypes.number,
 };
