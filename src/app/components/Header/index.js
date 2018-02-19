@@ -52,6 +52,7 @@ export class Header extends PureComponent {
               <HeaderLink>List</HeaderLink>
             </Link>
             <HeaderLink href="https://github.com/JulienHe/GANS" target="_blank">Github</HeaderLink>
+            <HeaderLink href="https://github.com/JulienHe/GANS" target="_blank">Maik</HeaderLink>
           </HeaderNavigation>
         </HeaderContainer>
       </Container>

@@ -4,7 +4,7 @@
     "rewrites": [
       {
         "source": "**/**",
-        "function": "app-next"
+        "function": "app"
       }
     ],
     "predeploy": "yarn build-public"

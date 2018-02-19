@@ -62,6 +62,7 @@
     "deploy-app": "yarn firebase deploy --only hosting,functions:app",
     "deploy-functions": "yarn firebase deploy --only functions:app",
     "deploy-all": "yarn run build-routes && yarn firebase deploy",
+    "serve": "firebase serve",
     "clean": "rimraf dist/**",
     "build-public": "cpx \"src/app/static/**\" \"dist/public/static\" -C",
     "build-routes": "cpx \"src/routes.js\" \"dist/functions\" -C",
