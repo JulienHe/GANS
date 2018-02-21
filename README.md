@@ -35,6 +35,20 @@ cd server
 graphchool deploy
 ```
 
+Of course you can use a different GraphQL provider!
+
+## Environment
+Create a file `.env` at the root of your project. GANS uses [dotenv](https://github.com/motdotla/dotenv) make keys available in the project.
+It's also a good way to hide your keys.
+
+```bash
+# GRAPHQL
+GRAPHQL_ENDPOINT = your_endpoint
+GRAPHQL_SUBSCRIPTIONS = your_subscription
+```
+
+You can add your own keys to the project too, the example here is like the minimum for the project.
+
 ## Next.js Development
 
 Standard Next.js development with Hot-module Reloading etc
