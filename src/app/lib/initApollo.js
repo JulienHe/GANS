@@ -6,8 +6,8 @@ import { split } from 'apollo-client-preset';
 import { getMainDefinition } from 'apollo-utilities';
 import fetch from 'isomorphic-unfetch';
 
-const GRAPHQL_ENDPOINT = 'https://api.graph.cool/simple/v1/cjdd0efxp3les0146142pum8n'; // Replace with your own simple endpoint
-const SUBSCRIPTIONS_ENDPOINT = 'wss://subscriptions.ap-northeast-1.graph.cool/v1/cjdd0efxp3les0146142pum8n'; // Replace with your own subscriptions endpoint
+const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT; // Replace with your own simple endpoint
+const SUBSCRIPTIONS_ENDPOINT = process.env.GRAPHQL_SUBSCRIPTIONS; // Replace with your own subscriptions endpoint
 let apolloClient = null;
 
 // Polyfill fetch() on the server (used by apollo-client)
